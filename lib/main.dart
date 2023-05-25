@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
       debugShowCheckedModeBanner: false,
       home: MyHomePage(products: products),
     );
@@ -30,7 +31,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Diagnostic Reports",
+          title: Text("Radiology Reports",
               style: TextStyle(color:Colors.pink)),
 
           backgroundColor: Colors.black,

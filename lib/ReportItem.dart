@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'DiagnosticReport.dart';
 import 'WebViewPage.dart';
+
 class ReportItem extends StatelessWidget {
-  String url = "https://pacs.deepmd.io/viewer/";
+  final String url = "https://pacs.deepmd.io/viewer/";
   ReportItem({this.item});
 
   final DiagnosticReport item;
