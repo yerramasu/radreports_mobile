@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'fruit.dart';
-import 'fruitList.dart';
+import 'DiagnosticReport.dart';
+import 'ReportsList.dart';
+import 'ReportItem.dart';
 import 'operation.dart';
 
-void main() => runApp(MyApp(products: fetchFruit()));
+void main() => runApp(MyApp(products: fetchReports()));
 
 class MyApp extends StatelessWidget {
-  final Future<List<Fruit>> products;
+  final Future<List<DiagnosticReport>> products;
 
   MyApp({this.products});
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final Future<List<Fruit>> products;
+  final Future<List<DiagnosticReport>> products;
 
   MyHomePage({this.products});
 
@@ -29,17 +30,19 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Rest API Demo"),
-          backgroundColor: Colors.cyan,
+          title: Text("Diagnostic Reports",
+              style: TextStyle(color:Colors.pink)),
+
+          backgroundColor: Colors.black,
           centerTitle: true,
         ),
         body: Center(
-          child: FutureBuilder<List<Fruit>>(
+          child: FutureBuilder<List<DiagnosticReport>>(
             future: products,
             builder: (context, snapshot) {
               if (snapshot.hasError) print(snapshot.error);
               return snapshot.hasData
-                  ? FruitList(items: snapshot.data)
+                  ? ReportList(items: snapshot.data)
                   : Center(child: CircularProgressIndicator());
             },
           ),
