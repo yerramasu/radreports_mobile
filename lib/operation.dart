@@ -7,10 +7,11 @@ import 'DiagnosticReport.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<DiagnosticReport>> fetchReports() async {
-  String url = "http://ehr.radreports.ai/hapi-fhir-jpaserver/fhir/";
+  String myurl = "http://ehr.radreports.ai/hapi-fhir-jpaserver/fhir/";
 
+  // http.get(Uri.parse('https://swapi.co/api/people'));
   final response = await http.get(
-      url+ "DiagnosticReport");
+      Uri.parse(myurl+ "DiagnosticReport"));
   if (response.statusCode == 200) {
     var values = json.decode(response.body);
     var entry = values["entry"] as List;
@@ -38,11 +39,11 @@ int id = 0;
       var studyID = codeTextIndex["code"];
 
 
-      var patient = await getPatient( url,ref);
+      var patient = await getPatient( myurl,ref);
       var bodyPart = resource["result"];
       var bodySite = bodyPart[0];
       var obReference = bodySite["reference"];
-      var observation = await getObservation(url, obReference);
+      var observation = await getObservation(myurl, obReference);
 
       var fullName = patient["name"];
       var dob = patient["age"];
@@ -69,9 +70,9 @@ int id = 0;
     throw Exception('Unable to fetch data from the REST API');
   }
 }
-Future<Map>  getPatient(String url,String responseBody) async{
+Future<Map>  getPatient(String myurl,String responseBody) async{
   final response = await http.get(
-      url+ responseBody);
+      Uri.parse(myurl+ responseBody));
   if (response.statusCode == 200) {
     var values = json.decode(response.body);
     var fname = values["name"];
@@ -93,9 +94,9 @@ Future<Map>  getPatient(String url,String responseBody) async{
   }
 }
 
-Future<String>  getObservation(String url,String responseBody) async{
+Future<String>  getObservation(String myurl,String responseBody) async{
   final response = await http.get(
-      url+ responseBody);
+      Uri.parse(myurl+ responseBody));
   if (response.statusCode == 200) {
     var values = json.decode(response.body);
     var coding = values["bodySite"];
